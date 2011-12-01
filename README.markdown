@@ -1,0 +1,1 @@
+This Compass plugin provides some easy to use mixins for creating buttons with icons.
