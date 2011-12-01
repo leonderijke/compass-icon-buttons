@@ -1,0 +1,61 @@
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
+
+@mixin icon-button($icon, $text) {
+	border: 1px solid #ccc;
+	@include border-radius(3px);
+
+	@include filter-gradient(#f7f7f7, #e1e1e1);
+	background: #f7f7f7;
+	@include background-image(linear-gradient(#f7f7f7, #e1e1e1));
+
+	@include box-shadow(inset rgba(255,255,255,0.5) 0 1px 0);
+
+	padding: 0 2px;
+	height: 26px;
+
+	color: #000;
+	cursor: pointer;
+	display: inline-block;
+	outline: none !important;
+
+	-moz-box-sizing: border-box !important;
+	/* IE7 hack */
+	zoom: 1;
+	*display: inline;
+
+	&:hover,
+	&:active {
+		border: 1px solid #aaa;
+		@include filter-gradient(#f7f7f7, #ccc);
+		background: #ececec;
+		@include background-image(linear-gradient(#f7f7f7, #ccc));
+	}
+
+	&:active,
+	&.active {
+		@include filter-gradient(#ccc, #f7f7f7);
+		background: #ddd;
+		@include background-image(linear-gradient(#ccc, #f1f1f1));
+	}
+	#{$icon} {
+		@include icon;
+	}
+	#{$text} {
+		@include text;
+	}
+}
+
+@mixin icon {
+	margin: 3px auto;
+	float: left;
+	width: 16px;
+	height: 16px;
+	display: block;
+}
+
+@mixin text {
+	margin: 0 2px;
+	line-height: 22px;
+}
