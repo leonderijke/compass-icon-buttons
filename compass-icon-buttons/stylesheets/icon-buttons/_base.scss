@@ -2,9 +2,42 @@
 @import "compass/css3/box-shadow";
 @import "compass/css3/images";
 
-@mixin icon-button($icon, $text) {
-	font-size: 12px;
+$button-padding: 5px !default;
+$icon-margin: 5px !default;
+
+@mixin single-line-icon-button($icon-size : 16px, $font-size: 12px, $icon-class : ".icon", $text-class : ".text") {
+	$line-height: normal;
+
+	@if $icon-size > $font-size {
+		$line-height: $icon-size + ($icon-margin * 2) - $font-size;
+	} @else if $icon-size < $font-size {
+		$icon-margin: ($font-size - $icon-size) / 2;
+	} @else {
+		// The default values will suffice
+	}
+
+	@include default-button-styles;
+
+	#{$icon-class} {
+		height: $icon-size;
+		width: $icon-size;
+		display: block;
+		float: left;
+		margin-right: $icon-margin;
+	}
+
+	#{$text-class} {
+		font-size: $font-size;
+		line-height: $line-height;
+		float: left;
+		display: block;
+	}
+}
+
+@mixin default-button-styles {
 	text-decoration: none;
+
+	padding: $button-padding;
 
 	border: 1px solid #ccc;
 	@include border-radius(3px);
@@ -14,10 +47,6 @@
 	@include background-image(linear-gradient(#f7f7f7, #e1e1e1));
 
 	@include box-shadow(inset rgba(255,255,255,0.5) 0 1px 0);
-
-	padding: 0 2px;
-	height: 26px;
-
 	color: #000;
 	cursor: pointer;
 	display: inline-block;
@@ -39,23 +68,27 @@
 		background: #ddd;
 		@include background-image(linear-gradient(#ccc, #f1f1f1));
 	}
+}
+
+
+
+@mixin icon-button($icon, $text) {
+	@include default-button-styles;
+
+	font-size: 12px;
+
+	padding: 0 2px;
+	height: 26px;
+
 	#{$icon} {
-		@include icon;
-	}
+		margin: 5px auto;
+		float: left;
+		width: 16px;
+		height: 16px;
+		display: block;
+		}
 	#{$text} {
-		@include text;
+		margin: 0 2px;
+		line-height: 25px;
 	}
-}
-
-@mixin icon {
-	margin: 5px auto;
-	float: left;
-	width: 16px;
-	height: 16px;
-	display: block;
-}
-
-@mixin text {
-	margin: 0 2px;
-	line-height: 25px;
 }
