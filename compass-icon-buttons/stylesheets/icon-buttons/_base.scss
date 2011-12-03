@@ -2,35 +2,44 @@
 @import "compass/css3/box-shadow";
 @import "compass/css3/images";
 
-$button-padding: 5px !default;
-$icon-margin: 5px !default;
+$button-padding: 5px !default; // Space from border to icon and text to border
+$icon-right-margin: 5px !default; // Space between icon and text
 
 @mixin single-line-icon-button($icon-size : 16px, $font-size: 12px, $icon-class : ".icon", $text-class : ".text") {
-	$line-height: normal;
-
-	@if $icon-size > $font-size {
-		$line-height: $icon-size + ($icon-margin * 2) - $font-size;
-	} @else if $icon-size < $font-size {
-		$icon-margin: ($font-size - $icon-size) / 2;
-	} @else {
-		// The default values will suffice
-	}
 
 	@include default-button-styles;
 
+	// Instead of line-height: normal we'll set it to 1.2. This should be sufficient for most fonts.
+	// See this excellent piece from Eric Meyer for the reasons why line-height: normal is abnormal:
+	// http://meyerweb.com/eric/thoughts/2008/05/06/line-height-abnormal/
+	$line-height: 1.25;
+	$icon-margin: 0;
+
+	@if $icon-size > $font-size {
+		// Make the text height equal to the icon height for proper vertical alignment
+		$line-height: $icon-size;
+	} @else {
+		// Make the total icon height equal to the text height for proper vertical alignment
+		#{$icon-class} {
+			$icon-margin: (($line-height * $font-size) - $icon-size) / 2;
+			margin-top: $icon-margin;
+			margin-bottom: $icon-margin;
+		}
+	}
+
 	#{$icon-class} {
+		margin-right: $icon-right-margin;
 		height: $icon-size;
 		width: $icon-size;
 		display: block;
 		float: left;
-		margin-right: $icon-margin;
 	}
 
 	#{$text-class} {
-		font-size: $font-size;
 		line-height: $line-height;
-		float: left;
+		font-size: $font-size;
 		display: block;
+		float: left;
 	}
 }
 
