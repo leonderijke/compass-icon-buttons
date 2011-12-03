@@ -1,3 +1,4 @@
+@import "compass/utilities/general/clearfix";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
 @import "compass/css3/images";
@@ -43,6 +44,48 @@ $icon-right-margin: 5px !default; // Space between icon and text
 	}
 }
 
+@mixin multi-line-icon-button($icon-size : 16px, $font-size-line1: 16px, $font-size-line2: 10px, $icon-class : ".icon", $text-line1-class : ".line1", $text-line2-class : ".line2") {
+
+	@include default-button-styles;
+
+	$margin-between-text: 5px !default;
+	$line-height-line1: 1.25;
+	$line-height-line2: 1.25;
+
+	$total-text-height: $line-height-line1 * $font-size-line1 + $line-height-line2 * $font-size-line2;
+	@if $icon-size < $total-text-height {
+		// Make the total icon height equal to the total text height for proper vertical alignment
+		#{$icon-class} {
+			$icon-margin: ($total-text-height - $icon-size) / 2;
+			margin-top: $icon-margin;
+			margin-bottom: $icon-margin;
+		}
+	}
+
+	#{$icon-class} {
+		margin-right: $icon-right-margin;
+		height: $icon-size;
+		width: $icon-size;
+		display: block;
+		float: left;
+	}
+
+	#{$text-line1-class} {
+		margin-left: $icon-size + $icon-right-margin;
+		margin-bottom: $margin-between-text;
+		font-size: $font-size-line1;
+		white-space: nowrap;
+		display: block;
+	}
+
+	#{$text-line2-class} {
+		margin-left: $icon-size + $icon-right-margin;
+		font-size: $font-size-line2;
+		white-space: nowrap;
+		display: block;
+	}
+}
+
 @mixin default-button-styles {
 	text-decoration: none;
 
@@ -76,28 +119,5 @@ $icon-right-margin: 5px !default; // Space between icon and text
 		@include filter-gradient(#ccc, #f7f7f7);
 		background: #ddd;
 		@include background-image(linear-gradient(#ccc, #f1f1f1));
-	}
-}
-
-
-
-@mixin icon-button($icon, $text) {
-	@include default-button-styles;
-
-	font-size: 12px;
-
-	padding: 0 2px;
-	height: 26px;
-
-	#{$icon} {
-		margin: 5px auto;
-		float: left;
-		width: 16px;
-		height: 16px;
-		display: block;
-		}
-	#{$text} {
-		margin: 0 2px;
-		line-height: 25px;
 	}
 }
