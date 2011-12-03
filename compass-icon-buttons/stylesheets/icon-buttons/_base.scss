@@ -6,7 +6,7 @@
 // Some sane defaults
 $button-padding: 5px !default; // Space from border to icon and text to border
 $icon-right-margin: 5px !default; // Space between icon and text
-$gradient-percentage: 10%; // Difference between the gradient colors
+$gradient-percentage: 10% !default; // Difference between the gradient colors
 
 
 @mixin single-line-icon-button($icon-size : 16px, $font-size: 12px, $icon-class : ".icon",
