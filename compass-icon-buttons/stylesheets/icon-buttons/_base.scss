@@ -3,12 +3,16 @@
 @import "compass/css3/box-shadow";
 @import "compass/css3/images";
 
+// Some sane defaults
 $button-padding: 5px !default; // Space from border to icon and text to border
 $icon-right-margin: 5px !default; // Space between icon and text
+$gradient-percentage: 10%; // Difference between the gradient colors
 
-@mixin single-line-icon-button($icon-size : 16px, $font-size: 12px, $icon-class : ".icon", $text-class : ".text") {
 
-	@include default-button-styles;
+@mixin single-line-icon-button($icon-size : 16px, $font-size: 12px, $icon-class : ".icon",
+		$text-class : ".text", $gradient-base-color: #f7f7f7) {
+
+	@include default-button-styles($gradient-base-color);
 
 	// Instead of line-height: normal we'll set it to 1.2. This should be sufficient for most fonts.
 	// See this excellent piece from Eric Meyer for the reasons why line-height: normal is abnormal:
@@ -44,16 +48,26 @@ $icon-right-margin: 5px !default; // Space between icon and text
 	}
 }
 
-@mixin multi-line-icon-button($icon-size : 16px, $font-size-line1: 16px, $font-size-line2: 10px, $icon-class : ".icon", $text-line1-class : ".line1", $text-line2-class : ".line2") {
+@mixin multi-line-icon-button($icon-size : 16px, $font-size-line1: 16px, $font-size-line2: 10px,
+		$icon-class : ".icon", $text-line1-class : ".line1", $text-line2-class : ".line2", $gradient-base-color: #f7f7f7) {
 
-	@include default-button-styles;
+	@include default-button-styles($gradient-base-color);
 
 	$margin-between-text: 5px !default;
 	$line-height-line1: 1.25;
 	$line-height-line2: 1.25;
 
 	$total-text-height: $line-height-line1 * $font-size-line1 + $line-height-line2 * $font-size-line2;
-	@if $icon-size < $total-text-height {
+	@if $icon-size > $total-text-height {
+		// Make the text height equal to the icon height for proper vertical alignment
+		$text-margin: ($icon-size - $total-text-height) / 2;
+		#{$text-line1-class} {
+			margin-top: $text-margin;
+		}
+		#{$text-line2-class} {
+			margin-bottom: $text-margin;
+		}
+	} @else {
 		// Make the total icon height equal to the total text height for proper vertical alignment
 		#{$icon-class} {
 			$icon-margin: ($total-text-height - $icon-size) / 2;
@@ -64,6 +78,7 @@ $icon-right-margin: 5px !default; // Space between icon and text
 
 	#{$icon-class} {
 		margin-right: $icon-right-margin;
+		line-height: $line-height-line1;
 		height: $icon-size;
 		width: $icon-size;
 		display: block;
@@ -80,44 +95,52 @@ $icon-right-margin: 5px !default; // Space between icon and text
 
 	#{$text-line2-class} {
 		margin-left: $icon-size + $icon-right-margin;
+		line-height: $line-height-line2;
 		font-size: $font-size-line2;
 		white-space: nowrap;
 		display: block;
 	}
 }
 
-@mixin default-button-styles {
+@mixin default-button-styles($gradient-base-color: #f7f7f7, $border-color: #ccc, $text-color: #000) {
+
+	$normal-gradient-start-color: $gradient-base-color;
+	$normal-gradient-stop-color: darken($gradient-base-color, $gradient-percentage);
+	$hover-gradient-start-color: $gradient-base-color;
+	$hover-gradient-stop-color: darken($gradient-base-color, $gradient-percentage * 2);
+	$active-gradient-start-color: darken($gradient-base-color, $gradient-percentage * 2);
+	$active-gradient-stop-color: $gradient-base-color;
+
 	text-decoration: none;
-
 	padding: $button-padding;
+	-moz-box-sizing: border-box !important;
+	display: inline-block;
 
-	border: 1px solid #ccc;
+	border: 1px solid $border-color;
 	@include border-radius(3px);
 
-	@include filter-gradient(#f7f7f7, #e1e1e1);
-	background: #f7f7f7;
-	@include background-image(linear-gradient(#f7f7f7, #e1e1e1));
+	background: $normal-gradient-start-color;
+	@include filter-gradient($normal-gradient-start-color, $normal-gradient-stop-color);
+	@include background-image(linear-gradient($normal-gradient-start-color, $normal-gradient-stop-color));
 
 	@include box-shadow(inset rgba(255,255,255,0.5) 0 1px 0);
-	color: #000;
+
+	color: $text-color;
 	cursor: pointer;
-	display: inline-block;
 	outline: none !important;
 
-	-moz-box-sizing: border-box !important;
-
 	&:hover,
-	&:active {
-		border: 1px solid #aaa;
-		@include filter-gradient(#f7f7f7, #ccc);
-		background: #ececec;
-		@include background-image(linear-gradient(#f7f7f7, #ccc));
+	&:focus {
+		border: 1px solid darken($gradient-base-color, $gradient-percentage * 3.025);;
+		background: darken($gradient-base-color, $gradient-percentage / 2);
+		@include filter-gradient($hover-gradient-start-color, $hover-gradient-stop-color);
+		@include background-image(linear-gradient($hover-gradient-start-color, $hover-gradient-stop-color));
 	}
 
 	&:active,
 	&.active {
-		@include filter-gradient(#ccc, #f7f7f7);
-		background: #ddd;
-		@include background-image(linear-gradient(#ccc, #f1f1f1));
+		background: darken($gradient-base-color, $gradient-percentage * 1.25);
+		@include filter-gradient($active-gradient-start-color, $active-gradient-stop-color);
+		@include background-image(linear-gradient($active-gradient-start-color, $active-gradient-stop-color));
 	}
 }
