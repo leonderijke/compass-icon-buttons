@@ -9,6 +9,6 @@ you can use directly or refer to as an example.
 }
 
 welcome_message %Q{
-In buttons.html you'll find some example markup for the icon buttons. In the stylesheet partial you can see how to
+In buttons.html you will find some example markup for the icon buttons. In the stylesheet partial you can see how to
 use the library and apply it to your markup.
 }
