@@ -1,7 +1,7 @@
 description "buttons with sprited icons, create single line or multi line buttons with ease."
 
 stylesheet 'buttons.scss', :media => 'screen, projection'
-html 'buttons.html
+html 'buttons.html'
 
 help %Q{
 Installs some html, a stylesheet partial and some images that
