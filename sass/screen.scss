@@ -1,0 +1,67 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "main";
+
+// Here we import compass-icon-buttons
+@import "icon-buttons";
+
+/*
+ * This is where you combine compass-icon-buttons with the spriting magic of Compass
+ *
+ * See http://compass-style.org/help/tutorials/spriting/ for more info on spriting
+ */
+@import "silk/*.png";
+@include all-silk-sprites;
+
+/*
+ * Here we'll mix it with our own styles
+ *
+ * First up: the single line buttons
+ */
+.single-button-default {
+	@include single-line-icon-button();
+}
+
+.single-button-equal {
+	// Equal icon-size and font-size
+	@include single-line-icon-button(16px, 16px);
+}
+
+.single-button-large {
+	// Font-size larger than icon-size
+	// Calling the mixin with named parameters
+	@include single-line-icon-button($icon-size: 16px, $font-size: 20px);
+}
+
+.single-button-huge {
+	// Font-size larger than icon-size
+	// Calling the mixin with just values (1st is icon-size, 2nd is font-size)
+	@include single-line-icon-button(16px, 24px);
+
+	// Define custom styles to override the defaults
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/*
+ * Then, some multi line buttons
+ */
+.multi-button-default {
+	@include multi-line-icon-button();
+}
+.multi-button-large {
+	@include multi-line-icon-button(16px, 20px, 13px);
+}
+.multi-button-huge {
+	@include multi-line-icon-button(16px, 24px, 15px);
+	// Define custom styles to override the defaults for this instance
+	padding-left: 10px;
+	padding-right: 10px;
+	.icon {
+		margin-right: 10px;
+	}
+}
