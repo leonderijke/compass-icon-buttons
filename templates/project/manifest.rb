@@ -1,6 +1,6 @@
 description "buttons with sprited icons, create single line or multi line buttons with ease."
 
-stylesheet 'buttons.scss', :media => 'screen, projection'
+stylesheet '_buttons.scss', :media => 'screen, projection'
 html 'buttons.html'
 image 'silk/accept.png'
 image 'silk/add.png'
