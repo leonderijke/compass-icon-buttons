@@ -130,7 +130,7 @@ body {
  */
 /* line 33, silk */
 .silk-sprite, .silk-accept, .silk-add {
-  background: url('/images/silk-s7ea2d37acf.png') no-repeat;
+  background: url('../images/silk-s7ea2d37acf.png') no-repeat;
 }
 
 /* line 60, ../../../.virtualenvs/compass/gems/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
