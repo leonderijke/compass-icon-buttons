@@ -1,1 +1,34 @@
 @import "icon-buttons";
+
+/*
+ * Here we'll mix it with our own styles
+ *
+ * First up: the single line buttons
+ */
+.single-button-default {
+	@include single-line-icon-button();
+}
+.single-button-huge {
+	// Font-size larger than icon-size
+	// Calling the mixin with just values (1st is icon-size, 2nd is font-size)
+	@include single-line-icon-button(16px, 24px);
+
+	// Define custom styles to override the defaults
+	padding-left: 10px;
+	padding-right: 10px;
+}
+/*
+ * Then, some multi line buttons
+ */
+.multi-button-default {
+	@include multi-line-icon-button();
+}
+.multi-button-huge {
+	@include multi-line-icon-button(16px, 24px, 15px);
+	// Define custom styles to override the defaults for this instance
+	padding-left: 10px;
+	padding-right: 10px;
+	.icon {
+		margin-right: 10px;
+	}
+}
