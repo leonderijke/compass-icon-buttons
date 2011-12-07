@@ -1,6 +1,16 @@
 @import "icon-buttons";
 
 /*
+ * This is where you combine compass-icon-buttons with the spriting magic of Compass
+ *
+ * See http://compass-style.org/help/tutorials/spriting/ for more info on spriting
+ *
+ * We're using the famous famfamfam silk icons here. See http://www.famfamfam.com/lab/icons/silk/
+ */
+@import "silk/*.png";
+@include all-silk-sprites;
+
+/*
  * Here we'll mix it with our own styles
  *
  * First up: the single line buttons

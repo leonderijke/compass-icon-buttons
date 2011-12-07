@@ -2,6 +2,8 @@ description "buttons with sprited icons, create single line or multi line button
 
 stylesheet 'buttons.scss', :media => 'screen, projection'
 html 'buttons.html'
+image 'silk/accept.png'
+image 'silk/add.png'
 
 help %Q{
 Installs some html, a stylesheet partial and some images that
