@@ -19,12 +19,14 @@ body {
 		font-size: 24px;
 		margin-bottom: 25px;
 	}
+	div {
+		margin-bottom: 50px;
+	}
 	.demo {
 		padding: 25px;
-		margin-bottom: 50px;
 		background-color: #f1f1f1;
 	}
-	code {
+	code, .code {
 		background-color: #eee;
 		font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
 		font-size: 12px;

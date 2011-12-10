@@ -67,6 +67,30 @@
 			<p>Or just create a new project:</p>
 			<code>$ compass create my_project -r icon-buttons --using icon-buttons</code>
 		</div>
+		<div class="instructions">
+			<h2>Usage</h2>
+			<p>Leveraging the spriting magic of Compass you can quickly create beautiful icon buttons:</p>
+			<code>
+				// First we import compass-icon-buttons<br>
+				@import "icon-buttons";<br>
+				<br>
+				// The we create the icons sprite<br>
+				// 'icons' is the directory containing your icons<br>
+				@import "icons/*.png";<br>
+				@include all-icons-sprites;<br>
+				<br>
+				// Then we'll use the compass-icon-buttons mixins:<br>
+				.btn {<br>
+					@include single-line-icon-button();<br>
+				}
+			</code>
+			<p>So, what does our markup look like? You'll find some examples in buttons.html:</p>
+<pre class="code">&lt;a href=&quot;#&quot; class=&quot;btn&quot; title=&quot;accept&quot;&gt;
+	&lt;span class=&quot;icon icons-accept&quot;&gt;&lt;/span&gt;
+	&lt;span class=&quot;text&quot;&gt;Accept&lt;/span&gt;
+&lt;/a&gt;
+</pre>
+		</div>
 	</section>
 </body>
 </html>

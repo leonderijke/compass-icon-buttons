@@ -93,13 +93,16 @@ body {
   margin-bottom: 25px;
 }
 /* line 22, ../sass/_main.scss */
+#main div {
+  margin-bottom: 50px;
+}
+/* line 25, ../sass/_main.scss */
 #main .demo {
   padding: 25px;
-  margin-bottom: 50px;
   background-color: #f1f1f1;
 }
-/* line 27, ../sass/_main.scss */
-#main code {
+/* line 29, ../sass/_main.scss */
+#main code, #main .code {
   background-color: #eee;
   font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
   font-size: 12px;
@@ -118,7 +121,7 @@ body {
   border: 1px solid #ddd;
   overflow: auto;
 }
-/* line 38, ../sass/_main.scss */
+/* line 40, ../sass/_main.scss */
 #main .instructions p {
   margin: 10px 0 10px 0;
 }
